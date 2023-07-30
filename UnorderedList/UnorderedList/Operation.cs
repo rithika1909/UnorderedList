@@ -8,9 +8,10 @@ namespace UnorderedList.UnorderedList
 {
     public class Operation
     {
+        LinkedList<string> linkedList = new LinkedList<string>();
         public void ReadFileAndPerformOperation(string filePath)
         {
-            LinkedList<string> linkedList = new LinkedList<string>();
+           
             string readAllText = File.ReadAllText(filePath);
             string[] words = readAllText.Split(" ");
             foreach (var data in words)
@@ -19,9 +20,18 @@ namespace UnorderedList.UnorderedList
             }
             linkedList.Display();
             Console.WriteLine("\nEnter a input :");
-            string input = Console.ReadLine();
-            linkedList.Operation(input);
+            string word = Console.ReadLine();
+            int position = linkedList.Search(word);
+            if(position==-1)
+            {
+                linkedList.Add(word);
+            }
+            else
+            {
+                linkedList.DeleteNodeAtParticularPosition(position);
+            }
             linkedList.Display();
         }
+        
     }
 }

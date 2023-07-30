@@ -1,4 +1,5 @@
-﻿using System;
+﻿using UnorderedList.OrderedList;
+using System;
 using System.Net.NetworkInformation;
 using UnorderedList.UnorderedList;
 using UnorderedList.UnorderedListQueue;
@@ -9,6 +10,7 @@ namespace UnorderedList
     class Program
     {
         static string UnOrderedFilePath = @"D:\UnorderedList\UnorderedList\UnorderedList\UnorderedList.txt";
+        static string OrderedFilePath = @"D:\UnorderedList\UnorderedList\OrderedList\OrderedList.txt";
         static void Main(string[] args)
         {
             Operation operation = new Operation();
@@ -19,6 +21,8 @@ namespace UnorderedList
             Console.WriteLine("\nQueue:");
             OperationQueue operationqueue = new OperationQueue();
             operationqueue.ReadFileAndPerformOperation(UnOrderedFilePath);
+            OperationOrdered operationOrdered = new OperationOrdered();
+            operationOrdered.ReadFileAndPerformOperation(OrderedFilePath);
 
         }
     }
