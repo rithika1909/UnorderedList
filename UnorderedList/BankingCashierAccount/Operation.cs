@@ -1,0 +1,88 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace UnorderedList.BankingCashierAccount
+{
+    public class Operationbank
+    {
+        Queuelist<string> queue = new Queuelist<string>();
+        int amount;
+        public void Balance(int amount)
+        {
+            this.amount = amount;
+        }
+
+        public void AddPersonsInQueue()
+        {
+            Console.WriteLine("Enter num of persons in Queue");
+            int num = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < num; i++)
+            {
+                Console.WriteLine("Enter your Name");
+                queue.Enqueue(Console.ReadLine());
+                bool flag = true;
+                while (flag)
+                {
+                    Console.WriteLine("Choose an option to proceed \n1. WithDraw\n2. Deposit");
+                    int option = Convert.ToInt32(Console.ReadLine());
+                    switch (option)
+                    {
+                        case 1:
+                            WithDraw();
+                            break;
+                        case 2:
+                            Deposit();
+                            break;
+                        case 3:
+                            DisplayAmountInATM();
+                            break;
+                    }
+                    queue.Dequeue();
+                    flag = false;
+                }
+            }
+        }
+        private void DisplayAmountInATM()
+        {
+            Console.WriteLine("Your balance is " + amount + " Rupees");
+        }
+
+        private void Deposit()
+        {
+            Console.WriteLine("Enter amount to Deposit");
+            int depositAmount = Convert.ToInt32(Console.ReadLine());
+            amount += depositAmount;
+            DisplayAmountInATM();
+        }
+
+        public void WithDraw()
+        {
+            DisplayAmountInATM();
+            Console.WriteLine("Enter amount to withdraw");
+            int withDrawAmount = Convert.ToInt32(Console.ReadLine());
+            if (withDrawAmount <= amount)
+                amount -= withDrawAmount;
+            else
+            {
+                Console.WriteLine("Insufficient Amount.. Please try again later");
+                
+                Console.WriteLine("Do you want to 1.Deposit\n 2.Withdraw");
+                int choice=Convert.ToInt32(Console.ReadLine());
+                switch(choice)
+                {
+                    case 1:
+                        Deposit();
+                        break;
+                    case 2:
+                        WithDraw();
+                        break;
+                    default: break;
+                }
+            }
+            DisplayAmountInATM();
+        }
+    }
+}
